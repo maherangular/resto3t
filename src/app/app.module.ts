@@ -1,3 +1,4 @@
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -14,6 +15,16 @@ import { MenuComponent } from './menu/menu.component';
 import { ContactComponent } from './contact/contact.component';
 import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
+import { LeaderService } from './services/leader.service';
+import { PromotionService } from './services/promotion.service';
+import { UserService } from './services/user.service';
+import { DishService } from './services/dish.service';
+import { baseURL } from 'src/shared/baseURL';
+import { LoginComponent } from './login/login.component';
+import { MatDialogModule } from '@angular/material';
+import { FormsModule } from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +33,8 @@ import { HomeComponent } from './home/home.component';
     MenuComponent,
     ContactComponent,
     AboutComponent,
-    HomeComponent
+    HomeComponent,
+    LoginComponent
 
   ],
   imports: [
@@ -32,9 +44,15 @@ import { HomeComponent } from './home/home.component';
     FlexLayoutModule ,
     MatToolbarModule ,
     MatButtonModule ,
-    MatListModule
+    MatListModule,
+    MatDialogModule,
+    HttpClientModule ,
+    FormsModule ,
+    MatInputModule
   ],
-  providers: [],
+  providers: [DishService, LeaderService, PromotionService, UserService ,
+                {provide: baseURL , useValue: 'baseURL' }],
+  entryComponents: [LoginComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,26 @@
+{{user | json }}
+
+<form novalidate #loginform="ngForm" (ngSubmit)='login()'>
+
+  <mat-dialog-content>
+         <mat-form-field>
+           <input matInput name="username" #username="ngModel" [(ngModel)]="user.username" required>
+            <mat-error *ngIf="username?.errors?.required">Username is required</mat-error>
+          </mat-form-field>
+         <mat-form-field>
+          <input matInput name="password" type="password" #password="ngModel" [(ngModel)]="user.password" required>
+        <mat-error *ngIf="password?.errors?.required"> password is required
+
+        </mat-error>
+        </mat-form-field>
+        <p *ngIf="errorLogin">You are not logged in</p>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+
+    <span class="flex-spacer"></span>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button type="submit" [disabled]="loginform.form.invalid" mat-button class="background-primary text-floral-white">Login</button>
+</mat-dialog-actions>
+
+</form>

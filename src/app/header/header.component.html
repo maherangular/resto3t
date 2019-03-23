@@ -4,6 +4,9 @@
   <a mat-button [routerLink]="['/about']" routerLinkActive="router-link-active" ><span class="fa fa-info fa-lg"></span>About</a>
   <a mat-button  [routerLink]="['/menu']" routerLinkActive="router-link-active"  ><span class="fa fa-list fa-lg"></span>Menu</a>
   <a mat-button   [routerLink]="['/contact']" routerLinkActive="router-link-active"   ><span class="fa fa-address-card fa-lg"></span>Contact</a>
+<div class="flex-spacer"></div>
+<a mat-button (click)='openLogin()' *ngIf="!userservice.isLoggedIn()" ><span class="fa fa-sign-in fa-lg"></span> login</a>
+<a mat-button (click)='logout()' *ngIf="userservice.isLoggedIn()" ><span class="fa fa-sign-out fa-lg"></span> log out</a>
 </mat-toolbar>
 
   <div class="container header"
