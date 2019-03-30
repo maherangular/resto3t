@@ -15,12 +15,12 @@ export class PromotionService {
     return this.http.get<Promotion[]>(baseURL + 'promotions')
     .pipe(catchError(this.processhttpmsgservice.ErrorHandler));
   }
-  getPromotion(id :string):Observable<Promotion>{
-    return this.http.get<Promotion>(baseURL + 'promotions/'+id)
+  getPromotion(id: string): Observable<Promotion>{
+    return this.http.get<Promotion>(baseURL + 'promotions/' + id)
     .pipe(catchError(this.processhttpmsgservice.ErrorHandler));
   }
-  getFeaturedPromotion():Observable<Promotion>{
-    return this.http.get<Promotion>(baseURL+'promotions?featured=true').pipe(map(Promotion=>Promotion[0]))
+  getFeaturedPromotion(): Observable<Promotion> {
+    return this.http.get<Promotion>(baseURL + 'promotions?featured=true').pipe(map(Promotion=>Promotion[0]))
     .pipe(catchError(this.processhttpmsgservice.ErrorHandler));
   }
 }

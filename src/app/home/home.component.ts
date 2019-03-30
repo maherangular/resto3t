@@ -18,32 +18,52 @@ dish: Dish ;
 leader: Leader ;
 promotion: Promotion ;
 
-Errmsgdish: Dish ;
+Errmsgdish: String ;
+Errmsgleader: String ;
+Errmsgpromotion: String ;
 
 subdish: Subscription ;
+subleader: Subscription;
+subpromotion: Subscription ;
+
 
   constructor(private dishservice: DishService ,
               private promotionservice: PromotionService ,
               private leaderservice: LeaderService   ,
-              @Inject('baseURL') private BaseURL    ) { }
+              @Inject('baseURL') protected BaseURL    ) { }
 
 
      ngOnInit() {
 
 
-     this.subdish = this.dishservice.getFeaturedDish().subscribe(
+      this.subdish = this.dishservice.getFeaturedDish().subscribe(
                                   dish => {this.dish =  dish ; } ,
                                   error => {this.Errmsgdish = error; }
                                   ,
                                   () =>  {console.log('obervable complete') ; }
                               );
 
-}
+      this.subpromotion  = this.promotionservice.getFeaturedPromotion().subscribe(
+
+                            promotion => {this.promotion = promotion ; } ,
+                            error => {this.Errmsgpromotion = error ; }
+                    );
+
+        this.subleader  =   this.leaderservice.getFeaturedLeader().subscribe(
+                          leader => this.leader = leader ,
+                          error => this.Errmsgleader = error
+                    );
+
+
+
+                            }
 
 
  ngOnDestroy() {
 
     this.subdish.unsubscribe();
+    this.subleader.unsubscribe();
+    this.subpromotion.unsubscribe();
   }
 
 }

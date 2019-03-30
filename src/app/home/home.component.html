@@ -1,3 +1,86 @@
-<p>
-    home works!
-</p>
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="10px">
+
+
+    <div [hidden]="dish || Errmsgdish">
+
+        <mat-spinner></mat-spinner>
+        <h3>Loading ... please wait</h3>
+    </div>
+
+    <div *ngIf="Errmsgdish">
+        <h3>Error {{Errmsgdish}}</h3>
+    </div>
+
+    <div fxFlex>
+        <mat-card *ngIf="dish">
+            <mat-card-header>
+                <mat-card-title>
+                    {{dish.name | uppercase}}
+                </mat-card-title>
+            </mat-card-header>
+            <img mat-card-image src="{{BaseURL + dish.image}}">
+            <mat-card-content>
+                {{dish.description}}
+
+            </mat-card-content>
+        </mat-card>
+
+    </div>
+
+    <div [hidden]="promotion || Errmsgpromotion">
+
+        <mat-spinner></mat-spinner>
+        <h3>Loading ... please wait</h3>
+    </div>
+
+    <div *ngIf="Errmsgpromotion">
+        <h3>Error {{Errmsgpromotion}}</h3>
+    </div>
+
+    <div fxFlex>
+        <mat-card *ngIf="promotion">
+            <mat-card-header>
+                <mat-card-title>
+                    {{promotion.name | uppercase}}
+                </mat-card-title>
+            </mat-card-header>
+            <img mat-card-image src="{{BaseURL + promotion.image}}">
+            <mat-card-content>
+                {{promotion.description}}
+
+            </mat-card-content>
+        </mat-card>
+
+    </div>
+
+
+    <div [hidden]="leader || Errmsgleader">
+
+        <mat-spinner></mat-spinner>
+        <h3>Loading ... please wait</h3>
+    </div>
+
+    <div *ngIf="Errmsgleader">
+        <h3>Error {{Errmsgleader}}</h3>
+    </div>
+
+    <div fxFlex>
+        <mat-card *ngIf="leader">
+            <mat-card-header>
+                <mat-card-title>
+                    {{leader.name | uppercase}}
+                </mat-card-title>
+            </mat-card-header>
+            <img mat-card-image src="{{BaseURL + leader.image}}">
+            <mat-card-content>
+                {{leader.description}}
+
+            </mat-card-content>
+        </mat-card>
+
+    </div>
+
+
+
+
+</div>
