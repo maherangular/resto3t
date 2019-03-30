@@ -1,3 +1,4 @@
+import { DishdetailComponent } from './dishdetail/dishdetail.component';
 import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
@@ -12,7 +13,8 @@ const routes: Routes = [
    } ,
    {path: 'menu' , component: MenuComponent} ,
    {path: 'about' , component: AboutComponent} ,
-   {path: 'contact' , component: ContactComponent}
+   {path: 'contact' , component: ContactComponent} ,
+   {path: 'dishdetail/:id' , component: DishdetailComponent}
 ];
 
 @NgModule({

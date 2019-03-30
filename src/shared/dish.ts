@@ -8,5 +8,5 @@ label: string ;
 price: string ;
 featured: Boolean ;
 description: string ;
-comment: Comment [] ;
+comments: Comment [] ;
 }

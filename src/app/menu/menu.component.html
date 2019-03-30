@@ -1,3 +1,30 @@
-<p>
-  menu works!
-</p>
+<div class="container" fxLayout="column" fxLayoutGap="10px">
+
+    <div>
+        <h4>Menu</h4>
+        <hr>
+
+    </div>
+
+
+    <div [hidden]="dishes || Errmsgdishes">
+        <mat-spinner></mat-spinner>
+        <h4>Loading ... please wait</h4>
+
+    </div>
+
+
+    <mat-grid-list cols="2" rowHeight="200px">
+        <mat-grid-tile *ngFor="let dish of dishes" [routerLink]="['/dishdetail', dish.id]" routerLinkActive="router-link-active">
+            <img height="200px" src="{{baseURL + dish.image}}">
+            <mat-grid-tile-footer>
+                {{dish.name | uppercase}}
+            </mat-grid-tile-footer>
+        </mat-grid-tile>
+
+    </mat-grid-list>
+
+
+
+
+</div>

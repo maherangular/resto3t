@@ -28,4 +28,10 @@ export class DishService {
     return this.http.get<Dish>(baseURL + 'dishes?featured=true').pipe(map(dishes => dishes[0]))
     .pipe(catchError(this.processhttpmsgservice.ErrorHandler));
   }
+
+  getDishesIds(): Observable<String[] | any> {
+
+     return this.getDishes().pipe(map(dishes => dishes.map(dish => dish.id)));
+
+  }
 }

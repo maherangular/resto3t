@@ -1,0 +1,68 @@
+<div class="container" fxLayout="row" fxLayoutAlign.gt-md="space-around center" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="10px">
+
+
+    <div [hidden]="dish || Errmsgdish">
+
+        <mat-spinner></mat-spinner>
+        <h3>Loading ... please wait</h3>
+    </div>
+
+    <div *ngIf="Errmsgdish">
+        <h3>Error {{Errmsgdish}}</h3>
+    </div>
+
+
+    <div fxFlex="40" *ngIf="dish">
+
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>
+                    {{dish.name}}
+                </mat-card-title>
+            </mat-card-header>
+            <img mat-card-image src="{{baseURL+dish.image}}">
+            <mat-card-content>
+                <p>{{dish.description}}</p>
+            </mat-card-content>
+
+            <mat-card-actions>
+                <button mat-button [routerLink]="['/dishdetail', prev]" routerLinkActive="router-link-active"><span class="fa fa-chevron-left fa-lg"></span></button>
+                <button mat-button (click)='goBack()'>Back</button>
+                <button mat-button>SHARE</button>
+
+                <button mat-button [routerLink]="['/dishdetail' , next]" routerLinkActive="router-link-active"><span class="fa fa-chevron-right fa-lg"></span></button>
+            </mat-card-actions>
+        </mat-card>
+
+    </div>
+
+
+
+    <div [hidden]="comments || Errmsgdish">
+
+        <mat-spinner></mat-spinner>
+        <h3>Loading ... please wait</h3>
+    </div>
+
+    <div *ngIf="Errmsgdish">
+        <h3>Error {{Errmsgdish}}</h3>
+    </div>
+
+    <div fxFlex="40" *ngIf="comments">
+
+        <h3>Comments</h3>
+
+        <mat-list>
+            <mat-list-item *ngFor="let comment of comments">
+                <p mat-line> {{comment.comment}}</p>
+                <p mat-line> {{comment.rating}} rating</p>
+                <p mat-line>-- {{comment.author}} {{comment.date | date}}</p>
+
+
+            </mat-list-item>
+
+        </mat-list>
+
+    </div>
+
+</div>
