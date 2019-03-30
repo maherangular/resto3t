@@ -27,15 +27,14 @@ errorLogin = false  ;
   }
       handel(user) {
 
-    if( user.length === 0) {
- this.errorLogin = true ;
+    if ( user.length === 0) {
+          this.errorLogin = true ;
 
-    }
-    else {
-      localStorage.setItem('login', user[0].username);
-     this.errorLogin = false ;
-     this.dialog.close();
-    }
+        } else {
+          localStorage.setItem('login', user.username);
+        this.errorLogin = false ;
+        this.dialog.close();
+        }
 
       }
 

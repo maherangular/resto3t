@@ -51,7 +51,7 @@ import {MatInputModule} from '@angular/material/input';
     MatInputModule
   ],
   providers: [DishService, LeaderService, PromotionService, UserService ,
-                {provide: baseURL , useValue: 'baseURL' }],
+                {provide: 'baseURL' , useValue: baseURL }],
   entryComponents: [LoginComponent],
   bootstrap: [AppComponent]
 })

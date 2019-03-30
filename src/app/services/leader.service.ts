@@ -1,4 +1,5 @@
-import { map } from 'rxjs/operators';
+import { ProcessMSGHTTPService } from './process-msghttp.service';
+import { map, catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -9,18 +10,21 @@ import { baseURL } from 'src/shared/baseURL';
 })
 export class LeaderService {
 
-  constructor(private http:HttpClient ) { }
+  constructor(private http:HttpClient , private processhttpmsgservice: ProcessMSGHTTPService) { }
 
   getLeaders(): Observable<Leader []> {
-    return this.http.get<Leader[]>(baseURL +'leaders' );
+    return this.http.get<Leader[]>(baseURL +'leaders' )
+    .pipe(catchError(this.processhttpmsgservice.ErrorHandler));
 
   }
   getLeader(id : string): Observable<Leader>{
-    return this.http.get<Leader>(baseURL + 'leaders/'+id);
+    return this.http.get<Leader>(baseURL + 'leaders/'+id)
+    .pipe(catchError(this.processhttpmsgservice.ErrorHandler));
 
   }
   getFeaturedLeader():Observable<Leader>{
-    return this.http.get<Leader>(baseURL +'leaders?featured=true').pipe(map(Leader => Leader[0]));
+    return this.http.get<Leader>(baseURL +'leaders?featured=true').pipe(map(Leader => Leader[0]))
+    .pipe(catchError(this.processhttpmsgservice.ErrorHandler));
 
   }
 }
