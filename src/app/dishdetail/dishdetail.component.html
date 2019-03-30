@@ -1,84 +1,82 @@
-<div class="container" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign.gt-md="space-around center" fxLayoutGap="10px" fxLayoutGap.xs="0">
+<div class="container" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign.gt-md="start start" fxLayoutGap="10px" fxLayoutGap.xs="0">
 
     <div [hidden]="dish || Errmsgdish">
-
         <mat-spinner></mat-spinner>
-        <h3>Loading ... please wait</h3>
+        <h4>Loading . . . Please Wait</h4>
+    </div>
+    <div fxFlex *ngIf="Errmsgdish">
+        <h2>Error</h2>
+        <h4>{{Errmsgdish}}</h4>
+    </div>
+    <div fxFlex="40">
+        <div *ngIf="dish" [@visibility]="visibility" [@expand]>
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>
+                        <h3>{{dish.name | uppercase}}</h3>
+                    </mat-card-title>
+                </mat-card-header>
+                <img mat-card-image src="{{baseURL + dish.image }}" alt={{dish.name}}>
+                <mat-card-content>
+                    <p>{{dish.description}}
+                    </p>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-button [routerLink]="['/dishdetail', prev]"><span class="fa fa-chevron-left fa-lg"></span></button>
+                    <button mat-button (click)="goBack()">BACK</button>
+                    <button mat-button>LIKE</button>
+                    <button mat-button>SHARE</button>
+                    <span class="flex-spacer"></span>
+                    <button mat-button [routerLink]="['/dishdetail', next]"><span class="fa fa-chevron-right fa-lg"></span></button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+
     </div>
 
-    <div *ngIf="Errmsgdish">
-        <h3>Error {{Errmsgdish}}</h3>
-    </div>
-
-
-    <div fxFlex="40" *ngIf="dish">
-
-        <mat-card [@visibility]="visibility">
-            <mat-card-header>
-                <mat-card-title>
-                    {{dish.name}}
-                </mat-card-title>
-            </mat-card-header>
-            <img mat-card-image src="{{baseURL+dish.image}}">
-            <mat-card-content>
-                <p>{{dish.description}}</p>
-            </mat-card-content>
-
-            <mat-card-actions>
-                <button mat-button [routerLink]="['/dishdetail', prev]" routerLinkActive="router-link-active"><span class="fa fa-chevron-left fa-lg"></span></button>
-                <button mat-button (click)='goBack()'>Back</button>
-                <button mat-button>SHARE</button>
-
-                <button mat-button [routerLink]="['/dishdetail' , next]" routerLinkActive="router-link-active"><span class="fa fa-chevron-right fa-lg"></span></button>
-            </mat-card-actions>
-        </mat-card>
-
-    </div>
-
-
-
-    <div [hidden]="comments || Errmsgdish">
-
+    <div fxFlex="10"></div>
+    <div [hidden]="comments">
         <mat-spinner></mat-spinner>
-        <h3>Loading ... please wait</h3>
+        <h4>Loading . . . Please Wait</h4>
+    </div>
+    <div fxFlex="40" *ngIf="dish" [@visibility]="visibility" [@expand]>
+        <div fxFlex>
+            <h3 mat-subheader>Comments</h3>
+            <mat-list cols="2" rowHeight="200px">
+                <mat-list-item *ngFor="let comment of comments">
+                    <p mat-line> {{comment.comment}} </p>
+                    <p mat-line> {{comment.rating}} Stars</p>
+                    <p mat-line> -- {{comment.author}} {{comment.date | date}}</p>
+
+                </mat-list-item>
+
+            </mat-list>
+
+            <div>
+                <form novalidate [formGroup]="CommentForm" #fform="ngForm" (ngSubmit)="putDish()">
+                    <p>
+                        <mat-form-field style="width: 100%">
+                            <input matInput formControlName="author" placeholder="Name" type="text" required>
+                            <mat-error *ngIf="FormErrors.author">{{FormErrors.author}}</mat-error>
+                        </mat-form-field>
+
+
+                        <mat-slider thumbLabel tickInterval="1" min="1" max="5" value="5" formControlName="rating"></mat-slider>
+                        <p>
+                            <mat-form-field style="width: 100%">
+                                <textarea matInput formControlName="comment" placeholder="Your Comment" rows=12></textarea>
+                                <mat-error *ngIf="FormErrors.comment">{{FormErrors.comment}}</mat-error>
+                            </mat-form-field>
+
+                        </p>
+                        <button type="submit" mat-button [disabled]="CommentForm.invalid" class="background-primary text-floral-white">Submit</button>
+                </form>
+            </div>
+
+        </div>
+
     </div>
 
-    <div *ngIf="Errmsgdish">
-        <h3>Error {{Errmsgdish}}</h3>
-    </div>
 
-    <div fxFlex="40" *ngIf="comments" [@visibility]="visibility">
-
-        <h3>Comments</h3>
-
-        <mat-list>
-            <mat-list-item *ngFor="let comment of comments">
-                <p mat-line> {{comment.comment}}</p>
-                <p mat-line> {{comment.rating}} rating</p>
-                <p mat-line>-- {{comment.author}} {{comment.date | date}}</p>
-
-
-            </mat-list-item>
-
-        </mat-list>
-
-        <form [formGroup]="CommentForm" novalidate (ngSubmit)="putDish()">
-
-            <mat-form-field style="width: 100%">
-                <input matInput formControlName="author" placeholder="Your name" required>
-                <mat-error *ngIf="FormError.author">{{FormError.author}}</mat-error>
-            </mat-form-field>
-
-            <mat-slider thumbLabel tickInterval="1" min="1" max="5" value="5" formControlName="rating">
-            </mat-slider>
-
-            <mat-form-field style="width: 100%">
-                <textarea matInput formControlName="comment" placeholder="Your comment" cols="12" required></textarea>
-                <mat-error *ngIf="FormError.comment">{{FormError.comment}}</mat-error>
-            </mat-form-field>
-            <button type="submit" [disabled]="CommentForm.invalid" mat-button class="background-primary text-floral-white">Submit</button>
-        </form>
-
-    </div>
 
 </div>

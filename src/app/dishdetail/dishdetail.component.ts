@@ -5,13 +5,14 @@ import { DishService } from '../services/dish.service';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { visibility } from '../animations/app.animation';
+import { visibility, expand } from '../animations/app.animation';
 
 @Component({
   selector: 'app-dishdetail',
   templateUrl: './dishdetail.component.html',
   styleUrls: ['./dishdetail.component.scss'] ,
-  animations: [visibility()]
+  animations: [visibility() ,
+  expand()]
 })
 export class DishdetailComponent implements OnInit {
 dish: Dish ;
@@ -26,7 +27,7 @@ Errmsgdish: String ;
 ErrmsgdishIds: String ;
 
 visibility = 'shown' ;
-FormError = {
+FormErrors = {
   comment: '',
   author: ''
 } ;
@@ -125,9 +126,9 @@ onValueChanged(data?: any  ) {
   const form = this.CommentForm;
 
   // tslint:disable-next-line:forin
-  for (const field in this.FormError) {
+  for (const field in this.FormErrors) {
 
-         this.FormError[field] = '';
+         this.FormErrors[field] = '';
 
           const control = form.get(field);
 
@@ -138,7 +139,7 @@ onValueChanged(data?: any  ) {
             // tslint:disable-next-line:forin
             for (const key in control.errors) {
 
-                this.FormError[field] += messages[key] + ' ';
+                this.FormErrors[field] += messages[key] + ' ';
 
             }
           }

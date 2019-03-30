@@ -25,6 +25,8 @@ import { LeaderService } from './services/leader.service';
 import { PromotionService } from './services/promotion.service';
 import { UserService } from './services/user.service';
 import { DishdetailComponent } from './dishdetail/dishdetail.component';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatSelectModule} from '@angular/material/select';
 
 import {MatSliderModule} from '@angular/material/slider';
 import { HighlightDirective } from './directives/highlight.directive';
@@ -60,7 +62,9 @@ import { HighlightDirective } from './directives/highlight.directive';
     MatCardModule ,
     MatGridListModule,
     ReactiveFormsModule ,
-    MatSliderModule
+    MatSliderModule ,
+    MatSlideToggleModule ,
+    MatSelectModule
   ],
   providers: [DishService, LeaderService, PromotionService, UserService ,
                 {provide: 'baseURL' , useValue: baseURL }],
