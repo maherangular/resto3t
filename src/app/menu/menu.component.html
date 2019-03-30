@@ -15,7 +15,7 @@
 
 
     <mat-grid-list cols="2" rowHeight="200px">
-        <mat-grid-tile *ngFor="let dish of dishes" [routerLink]="['/dishdetail', dish.id]" routerLinkActive="router-link-active">
+        <mat-grid-tile *ngFor="let dish of dishes" [routerLink]="['/dishdetail', dish.id]" routerLinkActive="router-link-active" appHighlight>
             <img height="200px" src="{{baseURL + dish.image}}">
             <mat-grid-tile-footer>
                 {{dish.name | uppercase}}
@@ -23,6 +23,7 @@
         </mat-grid-tile>
 
     </mat-grid-list>
+
 
 
 

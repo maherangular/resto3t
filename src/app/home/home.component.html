@@ -1,4 +1,4 @@
-<div class="container" fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="10px">
+<div class="container" fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="10px" fxLayoutAlign.gt-md="space-around center">
 
 
     <div [hidden]="dish || Errmsgdish">
@@ -12,7 +12,7 @@
     </div>
 
     <div fxFlex>
-        <mat-card *ngIf="dish">
+        <mat-card *ngIf="dish" [@expand]>
             <mat-card-header>
                 <mat-card-title>
                     {{dish.name | uppercase}}
@@ -38,7 +38,7 @@
     </div>
 
     <div fxFlex>
-        <mat-card *ngIf="promotion">
+        <mat-card *ngIf="promotion" [@expand]>
             <mat-card-header>
                 <mat-card-title>
                     {{promotion.name | uppercase}}
@@ -65,7 +65,7 @@
     </div>
 
     <div fxFlex>
-        <mat-card *ngIf="leader">
+        <mat-card *ngIf="leader" [@expand]>
             <mat-card-header>
                 <mat-card-title>
                     {{leader.name | uppercase}}

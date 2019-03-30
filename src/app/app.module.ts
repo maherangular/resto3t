@@ -1,7 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule, MatDialogModule, MatGridListModule } from '@angular/material';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
@@ -26,6 +26,8 @@ import { PromotionService } from './services/promotion.service';
 import { UserService } from './services/user.service';
 import { DishdetailComponent } from './dishdetail/dishdetail.component';
 
+import {MatSliderModule} from '@angular/material/slider';
+import { HighlightDirective } from './directives/highlight.directive';
 
 
 @NgModule({
@@ -38,7 +40,8 @@ import { DishdetailComponent } from './dishdetail/dishdetail.component';
     AboutComponent,
     HomeComponent,
     LoginComponent,
-    DishdetailComponent
+    DishdetailComponent,
+    HighlightDirective
 
   ],
   imports: [
@@ -55,7 +58,9 @@ import { DishdetailComponent } from './dishdetail/dishdetail.component';
     MatInputModule ,
     MatProgressSpinnerModule ,
     MatCardModule ,
-    MatGridListModule
+    MatGridListModule,
+    ReactiveFormsModule ,
+    MatSliderModule
   ],
   providers: [DishService, LeaderService, PromotionService, UserService ,
                 {provide: 'baseURL' , useValue: baseURL }],

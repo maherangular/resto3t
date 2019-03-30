@@ -1,5 +1,4 @@
-<div class="container" fxLayout="row" fxLayoutAlign.gt-md="space-around center" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="10px">
-
+<div class="container" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutAlign.gt-md="space-around center" fxLayoutGap="10px" fxLayoutGap.xs="0">
 
     <div [hidden]="dish || Errmsgdish">
 
@@ -14,7 +13,7 @@
 
     <div fxFlex="40" *ngIf="dish">
 
-        <mat-card>
+        <mat-card [@visibility]="visibility">
             <mat-card-header>
                 <mat-card-title>
                     {{dish.name}}
@@ -48,7 +47,7 @@
         <h3>Error {{Errmsgdish}}</h3>
     </div>
 
-    <div fxFlex="40" *ngIf="comments">
+    <div fxFlex="40" *ngIf="comments" [@visibility]="visibility">
 
         <h3>Comments</h3>
 
@@ -62,6 +61,23 @@
             </mat-list-item>
 
         </mat-list>
+
+        <form [formGroup]="CommentForm" novalidate (ngSubmit)="putDish()">
+
+            <mat-form-field style="width: 100%">
+                <input matInput formControlName="author" placeholder="Your name" required>
+                <mat-error *ngIf="FormError.author">{{FormError.author}}</mat-error>
+            </mat-form-field>
+
+            <mat-slider thumbLabel tickInterval="1" min="1" max="5" value="5" formControlName="rating">
+            </mat-slider>
+
+            <mat-form-field style="width: 100%">
+                <textarea matInput formControlName="comment" placeholder="Your comment" cols="12" required></textarea>
+                <mat-error *ngIf="FormError.comment">{{FormError.comment}}</mat-error>
+            </mat-form-field>
+            <button type="submit" [disabled]="CommentForm.invalid" mat-button class="background-primary text-floral-white">Submit</button>
+        </form>
 
     </div>
 

@@ -6,11 +6,14 @@ import { PromotionService } from '../services/promotion.service';
 import { Dish } from 'src/shared/dish';
 import { Promotion } from 'src/shared/promotion';
 import { Subscription } from 'rxjs';
+import { expand } from '../animations/app.animation';
+
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'] ,
+  animations: [expand()]
 })
 export class HomeComponent implements OnInit, OnDestroy  {
 
